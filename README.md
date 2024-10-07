@@ -4,8 +4,8 @@
 - Edges were generated between any nodes containing at least one common sample. Cypher query included in repository.
 - ROC based on 5-fold cross validation is used to evaluate GCN and compare to logistic regression. 
 
-# mRMR_GLM_NECE (logistic regression and Neo4j event generation)
+# mRMR_GLM_NECE
 - "CROSS VALIDATION W/O ITERATIVE LOG RES" is the most recent method used to create the logistic regression create for comparison to GCN.
 - All positive scoring features on mRMRe were included in the model. No further filtering using AIC was performed. 
 - ROC based on 5-fold cross validation is used to evaluated and compare to GCN.
-- Samples them clustered for Neo4j nodes.
+- Samples them clustered using hierarchical clustering for Neo4j nodes on the same MRI features. 
