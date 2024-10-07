@@ -1,4 +1,4 @@
-# CROSS VALIDATION W/O ITERATIVE LOG RES ----
+# CROSS VALIDATION W/O ITERATIVE LOG REG OPTIMIZATION ----
 # Required Libraries
 library(mRMRe)
 library(caret)
