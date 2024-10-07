@@ -9,3 +9,9 @@
 - All positive scoring features on mRMRe were included in the model. No further filtering using AIC was performed. 
 - ROC based on 5-fold cross validation is used to evaluated and compare to GCN.
 - Samples them clustered using hierarchical clustering for Neo4j nodes on the same MRI features. 
+
+# EdgeQuery
+- Neo4j query used to create edges.
+
+# all_nodeimport
+- Script to import hierarchical clustering events as nodes in Meo4j across all MRI features with positive mRMRe output.
