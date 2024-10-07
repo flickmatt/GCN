@@ -6,7 +6,7 @@ library(glmnet)
 library(pROC)
 library(ggplot2)
 
-# Select columns that contain "Raw_Mean" but not "nii.gz"
+# Select columns that contain "Raw_Mean" but not "nii.gz" and exclude T1+C
 df_cols <- grep("Raw_Mean", names(master), value = TRUE)
 df_cols <- df_cols[!grepl("nii.gz", df_cols)]
 df_cols <- df_cols[!grepl("SPGRC", df_cols)]
