@@ -1,0 +1,28 @@
+CALL apoc.periodic.iterate(
+'
+MATCH (n)
+WITH collect(n) AS selectedNodes
+UNWIND selectedNodes AS n1
+UNWIND selectedNodes AS n2
+WITH n1, n2
+WHERE id(n1) < id(n2)
+AND any(sample1 IN split(n1.samples, ",")
+WHERE any(sample2 IN split(n2.samples, ",")
+WHERE sample1 = sample2))
+RETURN id(n1) as id1, id(n2) as id2
+ORDER BY id1, id2'
+,
+
+
+
+
+'
+MATCH (n1), (n2)
+WHERE id(n1) = id1 AND id(n2) = id2
+MERGE (n1)-[r1:RELATIONSHIP]->(n2)
+MERGE (n2)-[r2:RELATIONSHIP]->(n1)
+',
+{batchSize: 50000, parallel: true}
+)
+YIELD batches, total
+RETURN batches, total;
