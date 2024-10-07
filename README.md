@@ -14,4 +14,4 @@
 - Neo4j query used to create edges.
 
 # all_nodeimport
-- Script to import hierarchical clustering events as nodes in Meo4j across all MRI features with positive mRMRe output.
+- Script to import hierarchical clustering events as nodes in Neo4j across all MRI features with positive mRMRe output.
