@@ -250,3 +250,42 @@ plot_roc(rf_model, test_data, ranked_features)
 plot_roc(svm_model, test_data, ranked_features)
 plot_roc(xgb_model, test_data, ranked_features)
 
+# combined plot
+# Function to compute ROC for cross-validation
+compute_roc <- function(model, test_data, ranked_features) {
+  # Cross-Validation ROC
+  cv_predictions <- model$pred
+  roc_curve_cv <- roc(cv_predictions$obs, cv_predictions$CE)  # Replace 'CE' with positive class
+  
+  # Test set ROC
+  test_probabilities <- predict(model, newdata = test_data[, c(ranked_features, "MRI.contrast.enhancing.annotation")], type = "prob")
+  roc_curve_test <- roc(test_data$MRI.contrast.enhancing.annotation, test_probabilities$CE)
+  
+  return(list(cv = roc_curve_cv, test = roc_curve_test))
+}
+
+# Compute ROC curves for all models
+roc_logistic <- compute_roc(logistic_model, test_data, ranked_features)
+roc_rf <- compute_roc(rf_model, test_data, ranked_features)
+roc_svm <- compute_roc(svm_model, test_data, ranked_features)
+roc_xgb <- compute_roc(xgb_model, test_data, ranked_features)
+
+# Plot all ROC curves on one plot, adjusting AUC positions to avoid overlap
+plot(roc_logistic$test, col = "blue", legacy.axes = TRUE, main = "Test Set ROC Comparison", 
+     print.auc = TRUE, print.auc.x = 0.3, print.auc.y = 0.55, lwd = 2)  # Logistic Regression
+
+plot(roc_rf$test, add = TRUE, col = "red", 
+     print.auc = TRUE, print.auc.x = 0.3, print.auc.y = 0.5, lwd = 2)  # Random Forest
+
+plot(roc_svm$test, add = TRUE, col = "green", 
+     print.auc = TRUE, print.auc.x = 0.3, print.auc.y = 0.45, lwd = 2)  # SVM
+
+plot(roc_xgb$test, add = TRUE, col = "purple", 
+     print.auc = TRUE, print.auc.x = 0.3, print.auc.y = 0.4, lwd = 2)  # XGBoost
+
+# Add a legend to the plot
+legend("bottomright", legend = c("Logistic Regression", "Random Forest", "SVM", "XGBoost"),
+       col = c("blue", "red", "green", "purple"), lwd = 2)
+
+
+
