@@ -1,6 +1,9 @@
 # GCN-Test
 - Full script with hyperparameter tuning, cross vaildation, and final test set evaluation.
 
+# mRMR_multi_ML_NECE
+- Multiple model comparison with hyperparameter tuning, cross validation, and final test set evaluation.
+
 # GCN
 - Comparing graph convolutional network to logistic regression for regional GBM classification using MRI features.
 - Neo4j graph database contains nodes for each event of hierarchically clustered samples (non-enhancing (NE) and contrast-enhancing (CE) samples together) across MRI features selected using mRMRe filtering for NE/CE differentiation. All positive scoring features on mRMRe were included in the graph. 
